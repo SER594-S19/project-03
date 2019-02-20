@@ -307,6 +307,20 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect2) {
       if (buttonConnect2.getText().compareTo("Connect") == 0) {
         System.out.println("start");
+        
+        if(ipNum2.getText().compareTo("")==0)
+        {
+          JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
+          return;
+        }
+
+        try{
+        ports = Integer.parseInt(portNum2.getText());
+        }
+        catch(Exception e1){
+          JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
+          return;
+        }
         ports = Integer.parseInt(portNum2.getText());
         ips = ipNum2.getText();
         //dataGen();
@@ -324,6 +338,19 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect3) {
       if (buttonConnect3.getText().compareTo("Connect") == 0) {
         System.out.println("start");
+        if(ipNum3.getText().compareTo("")==0)
+        {
+          JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
+          return;
+        }
+
+        try{
+        ports = Integer.parseInt(portNum3.getText());
+        }
+        catch(Exception e1){
+          JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
+          return;
+        }
         ports = Integer.parseInt(portNum3.getText());
         ips = ipNum3.getText();
         //dataGen();
@@ -341,6 +368,19 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect4) {
       if (buttonConnect4.getText().compareTo("Connect") == 0) {
         System.out.println("start");
+        if(ipNum4.getText().compareTo("")==0)
+        {
+          JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
+          return;
+        }
+
+        try{
+        ports = Integer.parseInt(portNum4.getText());
+        }
+        catch(Exception e1){
+          JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
+          return;
+        }
         ports = Integer.parseInt(portNum4.getText());
         ips = ipNum4.getText();
         //dataGen();
@@ -358,6 +398,19 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect5) {
       if (buttonConnect5.getText().compareTo("Connect") == 0) {
         System.out.println("start");
+        if(ipNum5.getText().compareTo("")==0)
+        {
+          JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
+          return;
+        }
+
+        try{
+        ports = Integer.parseInt(portNum5.getText());
+        }
+        catch(Exception e1){
+          JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
+          return;
+        }
         ports = Integer.parseInt(portNum5.getText());
         ips = ipNum5.getText();
         //dataGen();
