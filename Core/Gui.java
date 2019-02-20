@@ -20,7 +20,10 @@ public class Gui extends JPanel implements ActionListener {
     private final int PORT = 1594;
     private JLabel labelPublishPort;
     private final JButton buttonConnect = new JButton("Run");
+    private final JButton buttonvHelp = new JButton("?");
+    private final JButton buttoncHelp = new JButton("?");
     private JSlider voltage, conductance;
+    JPanel popup = new JPanel();
 
     private Component createPanelConductance() {
         conductance = new JSlider(JSlider.HORIZONTAL,0,3,0);
@@ -128,6 +131,9 @@ public class Gui extends JPanel implements ActionListener {
         voltagePanel.add(vlabel);
         voltagePanel.add(Box.createRigidArea(new Dimension(40,0)));
         voltagePanel.add(createPanelVoltage());
+        voltagePanel.add(buttonvHelp);
+        buttonvHelp.addActionListener(this);
+        buttonvHelp.setEnabled(true);
 
         conductancePanel.add(Box.createHorizontalGlue());
         JLabel clabel = new JLabel("Conductance");
@@ -135,6 +141,9 @@ public class Gui extends JPanel implements ActionListener {
         conductancePanel.add(clabel);
         conductancePanel.add(Box.createRigidArea(new Dimension(10,0)));
         conductancePanel.add(createPanelConductance());
+        conductancePanel.add(buttoncHelp);
+        buttoncHelp.addActionListener(this);
+        buttoncHelp.setEnabled(true);
 
 
         portPanel.add(Box.createHorizontalGlue());
@@ -161,6 +170,11 @@ public class Gui extends JPanel implements ActionListener {
                 model.stop();
                 buttonConnect.setText("Run");
             }
+        } else if (e.getSource() == buttonvHelp) {
+        	JOptionPane.showMessageDialog(popup,
+                    "The silder values represent the range for battery Volatge","Volatage Slider Information",JOptionPane.PLAIN_MESSAGE);
+        } else if (e.getSource() == buttoncHelp) {
+        	JOptionPane.showMessageDialog(popup, "The silder values represent the range for level of arousal","Conductance Slider Information",JOptionPane.PLAIN_MESSAGE);
         }
     }
 
