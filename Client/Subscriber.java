@@ -67,7 +67,7 @@ public class Subscriber extends Observable implements Runnable {
       if (measureLocal == null) {
         stop = true;
       } else {
-              System.out.println("in hello read and =" + stop + " " + measureLocal);
+              System.out.println("in hello read and =" + stop + " " + "ip/port = " + Ip + port + " " + measureLocal);
         setData(measureLocal);
         setChanged();
         notifyObservers();
