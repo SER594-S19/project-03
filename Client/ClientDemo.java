@@ -182,6 +182,10 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     //add(buttonConnect, BorderLayout.SOUTH);
 
     buttonConnect1.addActionListener(this);
+    buttonConnect2.addActionListener(this);
+    buttonConnect3.addActionListener(this);
+    buttonConnect4.addActionListener(this);
+    buttonConnect5.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
@@ -252,15 +256,112 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     } catch (NumberFormatException nfe) {
       System.out.println("Exception: " + nfe);
     }
-	  /*for (int i=0;i<5;i++) {
-		  System.out.println("ipaddress from textboxes = " + ips[i]);
-		  System.out.println("ports from textboxes = " + ports[i]);
-	  }*/
-    for(int i=0;i<5;i++) {
-      subscriber[i] = new Subscriber(ips[i], ports[i]);
-      buttonConnect1.setEnabled(false);
-      service.submit(subscriber[i]);
-      subscriber[i].addObserver(this);
+    if (e.getSource() == buttonConnect1) {
+    	subscriber[0] = new Subscriber(ips[0], ports[0]);    	
+    	service.submit(subscriber[0]);    	
+    	subscriber[0].addObserver(this);
     }
+    if (e.getSource() == buttonConnect2) {
+    	subscriber[1] = new Subscriber(ips[1], ports[1]);    	
+    	service.submit(subscriber[1]);    	
+    	subscriber[1].addObserver(this);
+    }
+    if (e.getSource() == buttonConnect3) {
+    	subscriber[2] = new Subscriber(ips[2], ports[2]);    	
+    	service.submit(subscriber[2]);    	
+    	subscriber[2].addObserver(this);
+    }
+    if (e.getSource() == buttonConnect4) {
+    	subscriber[3] = new Subscriber(ips[3], ports[3]);    	
+    	service.submit(subscriber[3]);    	
+    	subscriber[3].addObserver(this);
+    }
+    if (e.getSource() == buttonConnect5) {
+    	subscriber[4] = new Subscriber(ips[4], ports[4]);    	
+    	service.submit(subscriber[4]);    	
+    	subscriber[4].addObserver(this);
+    }
+    
+    
+    /*if (e.getSource() == buttonConnect1) {
+    	if (buttonConnect1.getText().compareTo("Connect") == 0) {
+    		System.out.println("###Connecting1 ....");
+    		subscriber[0] = new Subscriber(ips[0], ports[0]);
+    		//buttonConnect1.setEnabled(false);
+    		service.submit(subscriber[0]);
+    		subscriber[0].addObserver(this);            	
+    		buttonConnect1.setText("Disconnect");
+    		//buttonConnect1.setEnabled(true);
+    	} else if (buttonConnect1.getText().compareTo("Disconnect") == 0) {
+    		System.out.println("###Disconnecting1 ....");
+    		subscriber[0].deleteObserver(this);
+    		service.shutdown();
+    		buttonConnect1.setText("Connect");                
+    	}
+	}
+    if (e.getSource() == buttonConnect2) {
+    	if (buttonConnect2.getText().compareTo("Connect") == 0) {
+    		System.out.println("###Connecting2 ....");
+    		subscriber[0] = new Subscriber(ips[0], ports[0]);
+    		//buttonConnect1.setEnabled(false);
+    		service.submit(subscriber[0]);
+    		subscriber[0].addObserver(this);            	
+    		buttonConnect2.setText("Disconnect");
+    		//buttonConnect1.setEnabled(true);
+    	} else if (buttonConnect2.getText().compareTo("Disconnect") == 0) {
+    		System.out.println("###Disconnecting2 ....");
+    		subscriber[0].deleteObserver(this);
+    		service.shutdown();
+    		buttonConnect2.setText("Connect");                
+    	}
+	}
+    if (e.getSource() == buttonConnect3) {
+    	if (buttonConnect3.getText().compareTo("Connect") == 0) {
+    		System.out.println("###Connecting3 ....");
+    		subscriber[0] = new Subscriber(ips[0], ports[0]);
+    		//buttonConnect1.setEnabled(false);
+    		service.submit(subscriber[0]);
+    		subscriber[0].addObserver(this);            	
+    		buttonConnect3.setText("Disconnect");
+    		//buttonConnect1.setEnabled(true);
+    	} else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
+    		System.out.println("###Disconnecting3 ....");
+    		subscriber[0].deleteObserver(this);
+    		service.shutdown();
+    		buttonConnect4.setText("Connect");                
+    	}
+	}
+    if (e.getSource() == buttonConnect4) {
+    	if (buttonConnect4.getText().compareTo("Connect") == 0) {
+    		System.out.println("###Conecting4 ....");
+    		subscriber[0] = new Subscriber(ips[0], ports[0]);
+    		//buttonConnect1.setEnabled(false);
+    		service.submit(subscriber[0]);
+    		subscriber[0].addObserver(this);            	
+    		buttonConnect4.setText("Disconnect");
+    		//buttonConnect1.setEnabled(true);
+    	} else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
+    		System.out.println("###Disconnecting4 ....");
+    		subscriber[0].deleteObserver(this);
+    		service.shutdown();
+    		buttonConnect4.setText("Connect");                
+    	}
+	}
+    if (e.getSource() == buttonConnect5) {
+    	if (buttonConnect5.getText().compareTo("Connect") == 0) {
+    		System.out.println("###Conecting5 ....");
+    		subscriber[0] = new Subscriber(ips[0], ports[0]);
+    		//buttonConnect1.setEnabled(false);
+    		service.submit(subscriber[0]);
+    		subscriber[0].addObserver(this);            	
+    		buttonConnect5.setText("Disconnect");
+    		//buttonConnect1.setEnabled(true);
+    	} else if (buttonConnect5.getText().compareTo("Disconnect") == 0) {
+    		System.out.println("###Disconnecting5 ....");
+    		subscriber[0].deleteObserver(this);
+    		service.shutdown();
+    		buttonConnect5.setText("Connect");                
+    	}
+	}*/
   }
 }
