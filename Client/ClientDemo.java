@@ -295,11 +295,11 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 //        //dataGen();
         subscriber[0] = new Subscriber(ips, ports);
         service.submit(subscriber[0]);
-        subscriber[0].addObserver(this);
-        JOptionPane.showMessageDialog(null,"Connection established.");
+        subscriber[0].addObserver(this);        
         buttonConnect1.setText("Disconnect");
       } else if (buttonConnect1.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
+        subscriber[0].deleteObserver(this);
         buttonConnect1.setText("Connect");
       }
     }
@@ -316,6 +316,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         buttonConnect2.setText("Disconnect");
       } else if (buttonConnect2.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
+        subscriber[1].deleteObserver(this);
         buttonConnect2.setText("Connect");
       }
     }
@@ -332,6 +333,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         buttonConnect3.setText("Disconnect");
       } else if (buttonConnect3.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
+        subscriber[2].deleteObserver(this);
         buttonConnect3.setText("Connect");
       }
     }
@@ -348,6 +350,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         buttonConnect4.setText("Disconnect");
       } else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
+        subscriber[3].deleteObserver(this);
         buttonConnect4.setText("Connect");
       }
     }
@@ -364,6 +367,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         buttonConnect5.setText("Disconnect");
       } else if (buttonConnect5.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
+        subscriber[4].deleteObserver(this);
         buttonConnect5.setText("Connect");
       }
     }
