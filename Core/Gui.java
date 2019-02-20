@@ -195,6 +195,7 @@ public class Gui extends JPanel implements ActionListener {
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Skin Conductance Simulator");
+        frame.setPreferredSize(new Dimension(400,300));
         frame.setMinimumSize(frame.getPreferredSize());
         frame.setLayout(new GridBagLayout());
         frame.add(new Gui());
@@ -208,7 +209,6 @@ public class Gui extends JPanel implements ActionListener {
 
 
         frame.pack();
-        frame.setSize(400, 300);
         frame.setVisible(true);
     }
 
