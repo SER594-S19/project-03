@@ -35,6 +35,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   private JTextArea ipNum5 = new JTextArea(1,10);
   private JTextArea portNum5 = new JTextArea(1,5);
   private JButton buttonConnect5 = new JButton("Connect");
+  private JPanel popup = new JPanel();
 
   public ClientDemo() {
 
@@ -56,7 +57,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     JLabel ipLabel5 = new JLabel("IP Address: ");
     JLabel portLabel5 = new JLabel("Port Number: ");
     JPanel topPanel= new JPanel();
-    topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+    topPanel.setLayout(new GridLayout(5,5,10,10));
 
     JPanel inputPanel1 = new JPanel(new BorderLayout());
     JPanel ipPanel1 = new JPanel(new BorderLayout());
@@ -171,21 +172,47 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     JScrollPane scroll = new JScrollPane(textArea);
     scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-    topPanel.add(inputPanel1);
-    topPanel.add(inputPanel2);
-    topPanel.add(inputPanel3);
-    topPanel.add(inputPanel4);
-    topPanel.add(inputPanel5);
+//    topPanel.add(inputPanel1);
+//    topPanel.add(inputPanel2);
+//    topPanel.add(inputPanel3);
+//    topPanel.add(inputPanel4);
+//    topPanel.add(inputPanel5);
+
+
+    topPanel.add(ipPanel1);
+    topPanel.add(portPanel1);
+    topPanel.add(buttonConnect1);
+    topPanel.add(ipPanel2);
+    topPanel.add(portPanel2);
+    topPanel.add(buttonConnect2);
+    topPanel.add(ipPanel3);
+    topPanel.add(portPanel3);
+    topPanel.add(buttonConnect3);
+    topPanel.add(ipPanel4);
+    topPanel.add(portPanel4);
+    topPanel.add(buttonConnect4);
+    topPanel.add(ipPanel5);
+    topPanel.add(portPanel5);
+    topPanel.add(buttonConnect5);
+
+
     add(topPanel, BorderLayout.NORTH);
     add(scroll, BorderLayout.CENTER);
 
     //add(buttonConnect, BorderLayout.SOUTH);
 
     buttonConnect1.addActionListener(this);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent e) {
+        //shutdown();
+        System.exit(0);
+      }
+    });
+    setSize(500,500);
+    setVisible(true);
+
     buttonConnect2.addActionListener(this);
-    buttonConnect3.addActionListener(this);
-    buttonConnect4.addActionListener(this);
-    buttonConnect5.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
       public void windowClosing(java.awt.event.WindowEvent e) {
@@ -237,131 +264,101 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    int [] ports = new int[5];
-    String [] ips = new String[5];
-    try {
-      for(int i=0;i<5;i++) {
-        ports[i] = Integer.parseInt(portNum1.getText());
-        ips[i++] = ipNum1.getText();
-        ports[i] = Integer.parseInt(portNum2.getText());
-        ips[i++] = ipNum2.getText();
-        ports[i] = Integer.parseInt(portNum3.getText());
-        ips[i++] = ipNum3.getText();
-        ports[i] = Integer.parseInt(portNum4.getText());
-        ips[i++] = ipNum4.getText();
-        ports[i] = Integer.parseInt(portNum5.getText());
-        ips[i++] = ipNum5.getText();
+    int ports;
+    String ips;
 
-      }
-    } catch (NumberFormatException nfe) {
-      System.out.println("Exception: " + nfe);
-    }
+
     if (e.getSource() == buttonConnect1) {
-    	subscriber[0] = new Subscriber(ips[0], ports[0]);    	
-    	service.submit(subscriber[0]);    	
-    	subscriber[0].addObserver(this);
+      if (buttonConnect1.getText().compareTo("Connect") == 0) {
+        System.out.println("start");
+        try{
+        ports = Integer.parseInt(portNum1.getText());
+        }
+        catch(Exception e1){
+          JOptionPane.showMessageDialog(null,"Error.");
+          ports=1594;
+        }
+        ips = ipNum1.getText();
+
+        JOptionPane.showMessageDialog(null,"Connecting.");
+
+//        if(portNum1.getText().compareTo("") == 0)
+//          JOptionPane.showMessageDialog(popup, "Insert a valid IP Address","Error",JOptionPane.PLAIN_MESSAGE);
+//        //dataGen();
+        subscriber[0] = new Subscriber(ips, ports);
+        service.submit(subscriber[0]);
+        subscriber[0].addObserver(this);
+        buttonConnect1.setText("Disconnect");
+      } else if (buttonConnect1.getText().compareTo("Disconnect") == 0) {
+        System.out.println("stop");
+        buttonConnect1.setText("Connect");
+      }
     }
+
     if (e.getSource() == buttonConnect2) {
-    	subscriber[1] = new Subscriber(ips[1], ports[1]);    	
-    	service.submit(subscriber[1]);    	
-    	subscriber[1].addObserver(this);
+      if (buttonConnect2.getText().compareTo("Connect") == 0) {
+        System.out.println("start");
+        ports = Integer.parseInt(portNum2.getText());
+        ips = ipNum2.getText();
+        //dataGen();
+        subscriber[1] = new Subscriber(ips, ports);
+        service.submit(subscriber[1]);
+        subscriber[1].addObserver(this);
+        buttonConnect2.setText("Disconnect");
+      } else if (buttonConnect2.getText().compareTo("Disconnect") == 0) {
+        System.out.println("stop");
+        buttonConnect2.setText("Connect");
+      }
     }
+
     if (e.getSource() == buttonConnect3) {
-    	subscriber[2] = new Subscriber(ips[2], ports[2]);    	
-    	service.submit(subscriber[2]);    	
-    	subscriber[2].addObserver(this);
+      if (buttonConnect3.getText().compareTo("Connect") == 0) {
+        System.out.println("start");
+        ports = Integer.parseInt(portNum3.getText());
+        ips = ipNum3.getText();
+        //dataGen();
+        subscriber[2] = new Subscriber(ips, ports);
+        service.submit(subscriber[2]);
+        subscriber[2].addObserver(this);
+        buttonConnect3.setText("Disconnect");
+      } else if (buttonConnect3.getText().compareTo("Disconnect") == 0) {
+        System.out.println("stop");
+        buttonConnect3.setText("Connect");
+      }
     }
+
     if (e.getSource() == buttonConnect4) {
-    	subscriber[3] = new Subscriber(ips[3], ports[3]);    	
-    	service.submit(subscriber[3]);    	
-    	subscriber[3].addObserver(this);
+      if (buttonConnect4.getText().compareTo("Connect") == 0) {
+        System.out.println("start");
+        ports = Integer.parseInt(portNum4.getText());
+        ips = ipNum4.getText();
+        //dataGen();
+        subscriber[3] = new Subscriber(ips, ports);
+        service.submit(subscriber[3]);
+        subscriber[3].addObserver(this);
+        buttonConnect4.setText("Disconnect");
+      } else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
+        System.out.println("stop");
+        buttonConnect4.setText("Connect");
+      }
     }
+
     if (e.getSource() == buttonConnect5) {
-    	subscriber[4] = new Subscriber(ips[4], ports[4]);    	
-    	service.submit(subscriber[4]);    	
-    	subscriber[4].addObserver(this);
+      if (buttonConnect5.getText().compareTo("Connect") == 0) {
+        System.out.println("start");
+        ports = Integer.parseInt(portNum5.getText());
+        ips = ipNum5.getText();
+        //dataGen();
+        subscriber[4] = new Subscriber(ips, ports);
+        service.submit(subscriber[4]);
+        subscriber[4].addObserver(this);
+        buttonConnect5.setText("Disconnect");
+      } else if (buttonConnect5.getText().compareTo("Disconnect") == 0) {
+        System.out.println("stop");
+        buttonConnect5.setText("Connect");
+      }
     }
-    
-    
-    /*if (e.getSource() == buttonConnect1) {
-    	if (buttonConnect1.getText().compareTo("Connect") == 0) {
-    		System.out.println("###Connecting1 ....");
-    		subscriber[0] = new Subscriber(ips[0], ports[0]);
-    		//buttonConnect1.setEnabled(false);
-    		service.submit(subscriber[0]);
-    		subscriber[0].addObserver(this);            	
-    		buttonConnect1.setText("Disconnect");
-    		//buttonConnect1.setEnabled(true);
-    	} else if (buttonConnect1.getText().compareTo("Disconnect") == 0) {
-    		System.out.println("###Disconnecting1 ....");
-    		subscriber[0].deleteObserver(this);
-    		service.shutdown();
-    		buttonConnect1.setText("Connect");                
-    	}
-	}
-    if (e.getSource() == buttonConnect2) {
-    	if (buttonConnect2.getText().compareTo("Connect") == 0) {
-    		System.out.println("###Connecting2 ....");
-    		subscriber[0] = new Subscriber(ips[0], ports[0]);
-    		//buttonConnect1.setEnabled(false);
-    		service.submit(subscriber[0]);
-    		subscriber[0].addObserver(this);            	
-    		buttonConnect2.setText("Disconnect");
-    		//buttonConnect1.setEnabled(true);
-    	} else if (buttonConnect2.getText().compareTo("Disconnect") == 0) {
-    		System.out.println("###Disconnecting2 ....");
-    		subscriber[0].deleteObserver(this);
-    		service.shutdown();
-    		buttonConnect2.setText("Connect");                
-    	}
-	}
-    if (e.getSource() == buttonConnect3) {
-    	if (buttonConnect3.getText().compareTo("Connect") == 0) {
-    		System.out.println("###Connecting3 ....");
-    		subscriber[0] = new Subscriber(ips[0], ports[0]);
-    		//buttonConnect1.setEnabled(false);
-    		service.submit(subscriber[0]);
-    		subscriber[0].addObserver(this);            	
-    		buttonConnect3.setText("Disconnect");
-    		//buttonConnect1.setEnabled(true);
-    	} else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
-    		System.out.println("###Disconnecting3 ....");
-    		subscriber[0].deleteObserver(this);
-    		service.shutdown();
-    		buttonConnect4.setText("Connect");                
-    	}
-	}
-    if (e.getSource() == buttonConnect4) {
-    	if (buttonConnect4.getText().compareTo("Connect") == 0) {
-    		System.out.println("###Conecting4 ....");
-    		subscriber[0] = new Subscriber(ips[0], ports[0]);
-    		//buttonConnect1.setEnabled(false);
-    		service.submit(subscriber[0]);
-    		subscriber[0].addObserver(this);            	
-    		buttonConnect4.setText("Disconnect");
-    		//buttonConnect1.setEnabled(true);
-    	} else if (buttonConnect4.getText().compareTo("Disconnect") == 0) {
-    		System.out.println("###Disconnecting4 ....");
-    		subscriber[0].deleteObserver(this);
-    		service.shutdown();
-    		buttonConnect4.setText("Connect");                
-    	}
-	}
-    if (e.getSource() == buttonConnect5) {
-    	if (buttonConnect5.getText().compareTo("Connect") == 0) {
-    		System.out.println("###Conecting5 ....");
-    		subscriber[0] = new Subscriber(ips[0], ports[0]);
-    		//buttonConnect1.setEnabled(false);
-    		service.submit(subscriber[0]);
-    		subscriber[0].addObserver(this);            	
-    		buttonConnect5.setText("Disconnect");
-    		//buttonConnect1.setEnabled(true);
-    	} else if (buttonConnect5.getText().compareTo("Disconnect") == 0) {
-    		System.out.println("###Disconnecting5 ....");
-    		subscriber[0].deleteObserver(this);
-    		service.shutdown();
-    		buttonConnect5.setText("Connect");                
-    	}
-	}*/
+
   }
+
 }
