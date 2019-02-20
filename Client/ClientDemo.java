@@ -271,16 +271,24 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect1) {
       if (buttonConnect1.getText().compareTo("Connect") == 0) {
         System.out.println("start");
+
+        if(ipNum1.getText().compareTo("")==0)
+        {
+          JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
+          return;
+        }
+
         try{
         ports = Integer.parseInt(portNum1.getText());
         }
         catch(Exception e1){
-          JOptionPane.showMessageDialog(null,"Error.");
-          ports=1594;
+          JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
+          return;
         }
+
         ips = ipNum1.getText();
 
-        JOptionPane.showMessageDialog(null,"Connecting.");
+
 
 //        if(portNum1.getText().compareTo("") == 0)
 //          JOptionPane.showMessageDialog(popup, "Insert a valid IP Address","Error",JOptionPane.PLAIN_MESSAGE);
@@ -288,6 +296,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         subscriber[0] = new Subscriber(ips, ports);
         service.submit(subscriber[0]);
         subscriber[0].addObserver(this);
+        JOptionPane.showMessageDialog(null,"Connection established.");
         buttonConnect1.setText("Disconnect");
       } else if (buttonConnect1.getText().compareTo("Disconnect") == 0) {
         System.out.println("stop");
