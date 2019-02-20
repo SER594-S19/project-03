@@ -116,6 +116,9 @@ public class Gui extends JPanel implements ActionListener {
         model = new Model(new DataGenerator(), new Publisher(PORT));
         this.setBackground(Color.WHITE);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
 
         JPanel voltagePanel = new JPanel();
         JPanel conductancePanel = new JPanel();
@@ -128,9 +131,19 @@ public class Gui extends JPanel implements ActionListener {
         voltagePanel.add(Box.createHorizontalGlue());
         JLabel vlabel = new JLabel("Voltage");
         vlabel.setHorizontalAlignment(getX());
+        c.gridx = 0;
+        c.gridy = 0;
+        gridbag.setConstraints(voltagePanel, c);
+        //contentPane.add(button);
         voltagePanel.add(vlabel);
         voltagePanel.add(Box.createRigidArea(new Dimension(40,0)));
+        c.gridx = 1;
+        c.gridy = 0;
+        gridbag.setConstraints(voltagePanel, c);
         voltagePanel.add(createPanelVoltage());
+        c.gridx = 2;
+        c.gridy = 0;
+        gridbag.setConstraints(voltagePanel, c);
         voltagePanel.add(buttonvHelp);
         buttonvHelp.addActionListener(this);
         buttonvHelp.setEnabled(true);
@@ -183,6 +196,7 @@ public class Gui extends JPanel implements ActionListener {
 
         JFrame frame = new JFrame("Skin Conductance Simulator");
         frame.setMinimumSize(frame.getPreferredSize());
+        frame.setLayout(new GridBagLayout());
         frame.add(new Gui());
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
