@@ -529,6 +529,10 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
       
     }else if (e.getSource() == buttonConnect3) {
         ipSkin = textField2.getText();
+      if(ipSkin.compareTo("")==0){
+        JOptionPane.showMessageDialog(null,"Please enter a valid IP address");
+        return;
+      }
     	connect_status3 = !connect_status3;
     	
     	if(connect_status3)
@@ -547,6 +551,10 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
     }else if (e.getSource() == buttonConnect4) {
         ipHeart = textField3.getText();
+      if(ipHeart.compareTo("")==0){
+        JOptionPane.showMessageDialog(null,"Please enter a valid IP address");
+        return;
+      }
     	connect_status4 = !connect_status4;
     	
     	if(connect_status4) {
@@ -565,6 +573,10 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     
     }else if (e.getSource() == buttonConnect5) {
         ipBCI = textField4.getText();
+      if(ipBCI.compareTo("")==0){
+        JOptionPane.showMessageDialog(null,"Please enter a valid IP address");
+        return;
+      }
     	connect_status5 = !connect_status5;
     	
     	if(connect_status5)
