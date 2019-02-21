@@ -19,8 +19,7 @@ public class ClientUI extends JPanel {
     private static ClientUI instance = null;
     private List<UIElement> simulators = new ArrayList<>();
     
-    String[] colors= {"#0d3d56","#1e4b63","#335a70","#4a6b7c","#687e8f"};
-
+    String[] colors= {"#0d3d56","#4a6b7c","#0d3d56","#4a6b7c","#0d3d56"};
     // Method used to get instance of the Client UI class
     private static ClientUI getInstance() {
         if (instance == null)
