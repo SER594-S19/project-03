@@ -51,7 +51,7 @@ public class Subscriber extends Observable implements Runnable {
     String measureLocal=null;
     try {
       client = new Socket(InetAddress.getByName(Ip.trim()), port); 
-      input = new BufferedReader(new InputStreamReader(client.getInputStream()));      
+      input = new BufferedReader(new InputStreamReader(client.getInputStream()));
       client.setSoTimeout(1000);
     } catch (IOException ex) {
       stop = true;
@@ -78,6 +78,7 @@ public class Subscriber extends Observable implements Runnable {
       }
   System.out.println("in hello end while" + stop);
     }
+                  ClientDemo.serverStopped(this.Ip, this.port);
                   System.out.println("in hello end loop");
     try {
       if (ois != null) {

@@ -21,22 +21,21 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
 
   private JTextArea textArea = new JTextArea();
-  private JTextArea ipNum1 = new JTextArea(1,10);
-  private JTextArea portNum1 = new JTextArea(1,5);
-  private JButton buttonConnect1 = new JButton("Connect");
-  private JTextArea ipNum2 = new JTextArea(1,10);
-  private JTextArea portNum2 = new JTextArea(1,5);
-  private JButton buttonConnect2 = new JButton("Connect");
-  private JTextArea ipNum3 = new JTextArea(1,10);
-  private JTextArea portNum3 = new JTextArea(1,5);
-  private JButton buttonConnect3 = new JButton("Connect");
-  private JTextArea ipNum4 = new JTextArea(1,10);
-  private JTextArea portNum4 = new JTextArea(1,5);
-  private JButton buttonConnect4 = new JButton("Connect");
-  private JTextArea ipNum5 = new JTextArea(1,10);
-  private JTextArea portNum5 = new JTextArea(1,5);
-  private JButton buttonConnect5 = new JButton("Connect");
-  private JPanel popup = new JPanel();
+  private static JTextArea ipNum1 = new JTextArea(1,10);
+  private static JTextArea portNum1 = new JTextArea(1,5);
+  private static JButton buttonConnect1 = new JButton("Connect");
+  private static JTextArea ipNum2 = new JTextArea(1,10);
+  private static JTextArea portNum2 = new JTextArea(1,5);
+  private static JButton buttonConnect2 = new JButton("Connect");
+  private static JTextArea ipNum3 = new JTextArea(1,10);
+  private static JTextArea portNum3 = new JTextArea(1,5);
+  private static JButton buttonConnect3 = new JButton("Connect");
+  private static JTextArea ipNum4 = new JTextArea(1,10);
+  private static JTextArea portNum4 = new JTextArea(1,5);
+  private static JButton buttonConnect4 = new JButton("Connect");
+  private static JTextArea ipNum5 = new JTextArea(1,10);
+  private static JTextArea portNum5 = new JTextArea(1,5);
+  private static JButton buttonConnect5 = new JButton("Connect");
 
   public ClientDemo() {
 
@@ -272,6 +271,21 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
       }
     } catch (InterruptedException ex) {
     }
+  }
+
+  public static void serverStopped(String ip, int port){
+    JOptionPane.showMessageDialog(null,"Server with IP Address- "+ip+" and Port Number- "+ port+ " has stopped. Please try running the server again and connecting again.");
+    if(ip.compareTo(ipNum1.getText())==0 && port== Integer.parseInt(portNum1.getText()))
+      buttonConnect1.setText("Connect");
+    if(ip.compareTo(ipNum2.getText())==0 && port== Integer.parseInt(portNum2.getText()))
+      buttonConnect2.setText("Connect");
+    if(ip.compareTo(ipNum3.getText())==0 && port== Integer.parseInt(portNum3.getText()))
+      buttonConnect3.setText("Connect");
+    if(ip.compareTo(ipNum4.getText())==0 && port== Integer.parseInt(portNum4.getText()))
+      buttonConnect4.setText("Connect");
+    if(ip.compareTo(ipNum5.getText())==0 && port== Integer.parseInt(portNum5.getText()))
+      buttonConnect5.setText("Connect");
+    return;
   }
 
 
