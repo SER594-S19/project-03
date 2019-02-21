@@ -581,7 +581,7 @@ public class Gui extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		gifIcon.setIcon(createImageIcon(e.getActionCommand() + ".gif"));
+//		gifIcon.setIcon(createImageIcon(e.getActionCommand() + ".gif"));
 
 		System.out.println(e.getActionCommand());
 		System.out.println("listener trigger");
