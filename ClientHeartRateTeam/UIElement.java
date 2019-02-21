@@ -43,10 +43,6 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 	static private final String IPV4_REGEX = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
 	static private Pattern IPV4_PATTERN = Pattern.compile(IPV4_REGEX);
 
-	
-	
-
-
 	// Constructor for UI element present in client frame
 	UIElement(ClientSubscriber subscriber, String color) {
 
@@ -56,7 +52,6 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 		this.add(createMainPanel());
 		this.add(createRightButtonGroup());
 		this.subscriber = subscriber;
-
 	}
 
 	// Method used to validate the IP
@@ -73,7 +68,7 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 		return service;
 	}
 
-	// MEthod to get the ClientSubscriber instance
+	// Method to get the ClientSubscriber instance
 	public ClientSubscriber getSubscriber() {
 		return subscriber;
 	}
@@ -108,7 +103,7 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 
 		this.dataPane.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.dataPane.setForeground(Color.BLUE);
-		
+
 		//this.dataPane.setCaretColor(Color.decode("#030303"));
 		this.dataPane.setBackground(Color.decode("#c0e0f0"));
 		this.dataPane.setEnabled(false);
@@ -156,16 +151,9 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 			subscriber.setPort(Integer.parseInt(port.getText()));
 			service.submit(subscriber);
 			subscriber.addObserver(this);
-			// JOptionPane.showMessageDialog(new JPanel(), "Connected to "+
-			// ipAddress.getText() + " on PORT: "+ port.getText(), "Information",
-			// JOptionPane.INFORMATION_MESSAGE);
-
 		} else {
 			close();
 			connect.setText("Connect");
-			// JOptionPane.showMessageDialog(new JPanel(), "Not connected to "+
-			// ipAddress.getText() + " on PORT: "+ port.getText(), "Error",
-			// JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -178,19 +166,24 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 			this.getParent().repaint();
 			close();
 			connect.setText("Connect");
+			ipAddress.setEnabled(true);
+			port.setEnabled(true);
 			if (data.compareTo("STOPPED") == 0)
 				JOptionPane.showMessageDialog(new JPanel(), "Server Stopped", "Error", JOptionPane.ERROR_MESSAGE);
-			
-			final String dir = System.getProperty("user.dir");
-			dataPane.setText("CSV file generated in "+dir+" directory.");
+			dataPane.setText("CSV file generated in spruce directory.");
 		} else if (data.compareTo("FAIL") == 0) {
 			JOptionPane.showMessageDialog(new JPanel(), "Connection Fail: Server not running", "Error", JOptionPane.ERROR_MESSAGE);
 			connect.setText("Connect");
+			ipAddress.setEnabled(true);
+			port.setEnabled(true);
 		} else {
 			dataPane.setText(dataPane.getText() + "\n" + data);
 			dataPane.setForeground(Color.BLACK);
 			this.getParent().revalidate();
 			this.getParent().repaint();
+			ipAddress.setEnabled(false);
+			port.setEnabled(false);
 		}
 	}
 }
+
