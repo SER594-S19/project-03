@@ -259,6 +259,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
   public static void main(String[] args) {
     ClientDemo tester = new ClientDemo();
+    tester.setPreferredSize(new Dimension(500,500));
+    tester.setMinimumSize(frame.getPreferredSize());
 
   }
 
