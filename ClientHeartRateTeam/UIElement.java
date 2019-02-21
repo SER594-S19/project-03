@@ -182,7 +182,7 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 				JOptionPane.showMessageDialog(new JPanel(), "Server Stopped", "Error", JOptionPane.ERROR_MESSAGE);
 			dataPane.setText("CSV file generated in spruce directory.");
 		} else if (data.compareTo("FAIL") == 0) {
-			JOptionPane.showMessageDialog(new JPanel(), "Connection Fail", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JPanel(), "Connection Fail: Server not running", "Error", JOptionPane.ERROR_MESSAGE);
 			connect.setText("Connect");
 		} else {
 			dataPane.setText(dataPane.getText() + "\n" + data);
