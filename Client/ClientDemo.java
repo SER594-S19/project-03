@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ClientDemo extends JFrame implements Observer, ActionListener {
 
+
   private final Subscriber  [] subscriber = new Subscriber[5];
   private final ExecutorService service;
 
@@ -40,6 +41,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   public ClientDemo() {
 
     service = Executors.newCachedThreadPool();
+
+    this.setTitle("Client");
 
     // TO TEST, RUN TWO SERVERS IN PORTS 1594 and 1595
 
@@ -201,6 +204,9 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 
     //add(buttonConnect, BorderLayout.SOUTH);
 
+    setSize(500,500);
+    setVisible(true);
+
     buttonConnect1.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
       @Override
@@ -209,8 +215,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         System.exit(0);
       }
     });
-    setSize(500,500);
-    setVisible(true);
 
     buttonConnect2.addActionListener(this);
     addWindowListener(new java.awt.event.WindowAdapter() {
@@ -220,8 +224,33 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         System.exit(0);
       }
     });
-    setSize(500,500);
-    setVisible(true);
+
+    buttonConnect3.addActionListener(this);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent e) {
+        //shutdown();
+        System.exit(0);
+      }
+    });
+
+    buttonConnect4.addActionListener(this);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent e) {
+        //shutdown();
+        System.exit(0);
+      }
+    });
+
+    buttonConnect5.addActionListener(this);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowClosing(java.awt.event.WindowEvent e) {
+        //shutdown();
+        System.exit(0);
+      }
+    });
 
   }
 
@@ -279,7 +308,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
           return;
         }
-
         try{
         ports = Integer.parseInt(portNum1.getText());
         }
@@ -289,12 +317,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         }
 
         ips = ipNum1.getText();
-
-
-
-//        if(portNum1.getText().compareTo("") == 0)
-//          JOptionPane.showMessageDialog(popup, "Insert a valid IP Address","Error",JOptionPane.PLAIN_MESSAGE);
-//        //dataGen();
         subscriber[0] = new Subscriber(ips, ports);
         service.submit(subscriber[0]);
         subscriber[0].addObserver(this);        
@@ -309,13 +331,11 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     if (e.getSource() == buttonConnect2) {
       if (buttonConnect2.getText().compareTo("Connect") == 0) {
         System.out.println("start");
-        
         if(ipNum2.getText().compareTo("")==0)
         {
           JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
           return;
         }
-
         try{
         ports = Integer.parseInt(portNum2.getText());
         }
@@ -323,7 +343,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
           return;
         }
-        ports = Integer.parseInt(portNum2.getText());
         ips = ipNum2.getText();
         //dataGen();
         subscriber[1] = new Subscriber(ips, ports);
@@ -345,7 +364,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid IP Address.");
           return;
         }
-
         try{
         ports = Integer.parseInt(portNum3.getText());
         }
@@ -353,7 +371,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
           return;
         }
-        ports = Integer.parseInt(portNum3.getText());
         ips = ipNum3.getText();
         //dataGen();
         subscriber[2] = new Subscriber(ips, ports);
@@ -383,7 +400,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
           return;
         }
-        ports = Integer.parseInt(portNum4.getText());
+
         ips = ipNum4.getText();
         //dataGen();
         subscriber[3] = new Subscriber(ips, ports);
@@ -413,7 +430,6 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
           JOptionPane.showMessageDialog(null,"Please enter a valid port number.");
           return;
         }
-        ports = Integer.parseInt(portNum5.getText());
         ips = ipNum5.getText();
         //dataGen();
         subscriber[4] = new Subscriber(ips, ports);
