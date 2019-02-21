@@ -180,7 +180,9 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 			connect.setText("Connect");
 			if (data.compareTo("STOPPED") == 0)
 				JOptionPane.showMessageDialog(new JPanel(), "Server Stopped", "Error", JOptionPane.ERROR_MESSAGE);
-			dataPane.setText("CSV file generated in spruce directory.");
+			
+			final String dir = System.getProperty("user.dir");
+			dataPane.setText("CSV file generated in "+dir+" directory.");
 		} else if (data.compareTo("FAIL") == 0) {
 			JOptionPane.showMessageDialog(new JPanel(), "Connection Fail: Server not running", "Error", JOptionPane.ERROR_MESSAGE);
 			connect.setText("Connect");
