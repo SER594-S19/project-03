@@ -104,11 +104,9 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 		this.dataPane.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.dataPane.setForeground(Color.BLUE);
 
-		//this.dataPane.setCaretColor(Color.decode("#030303"));
 		this.dataPane.setBackground(Color.decode("#c0e0f0"));
 		this.dataPane.setEnabled(false);
 		this.dataPane.setEditable(true);
-		//this.dataPane.
 
 		JScrollPane scrollPane = new JScrollPane(this.dataPane);
 		panel.add(scrollPane);
@@ -169,7 +167,7 @@ public class UIElement extends JPanel implements Observer, ActionListener {
 			ipAddress.setEnabled(true);
 			port.setEnabled(true);
 			if (data.compareTo("STOPPED") == 0)
-				JOptionPane.showMessageDialog(new JPanel(), "Server Stopped", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JPanel(), "Server Stopped. Run server to continue", "Error", JOptionPane.ERROR_MESSAGE);
 			dataPane.setText("CSV file generated in spruce directory.");
 		} else if (data.compareTo("FAIL") == 0) {
 			JOptionPane.showMessageDialog(new JPanel(), "Connection Fail: Server not running", "Error", JOptionPane.ERROR_MESSAGE);
