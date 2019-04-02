@@ -2,6 +2,7 @@ package BCI.Client;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -39,12 +40,17 @@ public class BciClient extends JPanel {
     }
 
  
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         JFrame clientFrame = new JFrame("BCI Client");
         clientFrame.getContentPane().setLayout(new GridLayout(1, 1));
-        clientFrame.setLayout(new GridLayout(1, 1));
+        clientFrame.setLayout(new GridLayout(1, 2));
         BciClient bciClient=new BciClient();
         clientFrame.getContentPane().add(bciClient);
+//        VectorProject2 v=new VectorProject2("vector");
+//        clientFrame.getContentPane().add(v);
+        PlotPanel p = PlotPanel.getIntance();
+        clientFrame.add(p);
+        p.repaint();
         clientFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {

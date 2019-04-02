@@ -8,18 +8,21 @@ import org.jfree.chart.renderer.xy.VectorRenderer;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.JFreeChart;
+
+import javax.swing.JPanel;
+
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 
 /**
 * A simple introduction to using JFreeChart.
 */
-public class VectorProject2 extends ApplicationFrame{
+public class VectorProject2 extends JPanel{
 	public static double pleasure=0.8;
 	public static double arousal=1; 
 	public static VectorSeries vectorSeries;
 	public VectorProject2(String applicationTitle) {
-		super(applicationTitle);
+		//super(applicationTitle);
 		VectorSeriesCollection dataSet= new VectorSeriesCollection();
 		
 		vectorSeries=new VectorSeries("First Series");
@@ -47,7 +50,7 @@ public class VectorProject2 extends ApplicationFrame{
 		theChart.setTitle("PA vector");
 		 ChartPanel chartPanel = new ChartPanel( theChart );
 		 chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
-		  setContentPane( chartPanel ); 
+		  add( chartPanel ); 
 
 
 	}
@@ -58,10 +61,5 @@ public class VectorProject2 extends ApplicationFrame{
 */
 public static void main(String[] args) {
 	
-	VectorProject2 chart = new VectorProject2("Browser Usage Statistics"
-	         );
-	      chart.pack( );          
-	      RefineryUtilities.centerFrameOnScreen( chart );          
-	      chart.setVisible( true ); 
 }
 }

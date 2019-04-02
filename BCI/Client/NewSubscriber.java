@@ -17,7 +17,7 @@ public class NewSubscriber extends Observable implements Runnable {
 	private int port;
 	private String data;
 	private Writer file;
-
+	
 	
 	NewSubscriber(String Ip, int port) {
 		this.stop=false;
@@ -100,6 +100,20 @@ public class NewSubscriber extends Observable implements Runnable {
 					PADCalculator.pleasure=Double.parseDouble(tokens[1]);
 					VectorProject2.vectorSeries.remove(0);
 					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+					if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal <0.5) {
+						PlotPanel.getIntance().setHappyFace();
+						
+					}
+					if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal >0.5) {
+						PlotPanel.getIntance().setNeutralFace();
+					}
+					if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal >0.5) {
+						PlotPanel.getIntance().setSadFace();
+					}
+
+					if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal <0.5) {
+						PlotPanel.getIntance().setNeutralFace();
+					}
 				}
 				
 				if(measureLocal.contains("Heart Rate")) {
@@ -112,6 +126,7 @@ public class NewSubscriber extends Observable implements Runnable {
 					System.out.println("heart rate: "+PADCalculator.arousal);
 					
 				}
+				
 				setChanged();
 				notifyObservers();
 			}

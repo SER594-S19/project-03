@@ -34,7 +34,6 @@ public class SimulatorUI extends JPanel implements ActionListener, Observer {
 	static private final String IP = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
 	static private Pattern IP_PATTERN = Pattern.compile(IP);
 
-	static VectorProject2 v=new VectorProject2("cadsf");
     
 	SimulatorUI(NewSubscriber subscriber) {
 		this.subscriber = subscriber;
@@ -134,10 +133,6 @@ public class SimulatorUI extends JPanel implements ActionListener, Observer {
 			subscriber.setPort(Integer.parseInt(port.getText()));
 			service.submit(subscriber);
 			subscriber.addObserver(this);
-			if(!v.isVisible()) {
-				v.pack();
-				v.setVisible(true);
-			}
 		} else {
 			close();
 			connectButton.setText("Connect");
