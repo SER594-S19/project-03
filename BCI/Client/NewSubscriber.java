@@ -95,6 +95,23 @@ public class NewSubscriber extends Observable implements Runnable {
 			} else {
 				System.out.println(measureLocal);
 				setData(measureLocal);
+				if(measureLocal.contains("Channel 5")) {
+					String[] tokens=measureLocal.split(":");
+					PADCalculator.pleasure=Double.parseDouble(tokens[1]);
+					VectorProject2.vectorSeries.remove(0);
+					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+				}
+				
+				if(measureLocal.contains("Heart Rate")) {
+					
+					String[] tokens=measureLocal.split(",")[1].split("=");
+					PADCalculator.arousal=Double.parseDouble(tokens[1]);
+					PADCalculator.arousal=PADCalculator.arousal<100?PADCalculator.arousal/100:PADCalculator.arousal/1000;
+					VectorProject2.vectorSeries.remove(0);
+					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+					System.out.println("heart rate: "+PADCalculator.arousal);
+					
+				}
 				setChanged();
 				notifyObservers();
 			}

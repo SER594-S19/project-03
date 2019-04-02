@@ -54,5 +54,9 @@ public class BciClient extends JPanel {
         });
         clientFrame.pack();
         clientFrame.setVisible(true);
+        VectorProject2 v=new VectorProject2("cadsf");
+        v.pack();
+        v.setVisible(true);
+      
     }
 }

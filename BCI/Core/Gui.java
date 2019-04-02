@@ -42,7 +42,7 @@ public class Gui extends JFrame implements ActionListener{
 	
 	JButton btnNewButton = new JButton("Start");
 	JLabel brainLabel = new JLabel("");
-	JLabel portLabel = new JLabel("Publishing at port: 1594");
+	JLabel portLabel = new JLabel("Publishing at port:"+ PORT);
 	BCI.View.Expressions expressivePanel=new BCI.View.Expressions(dataGenerator);
 	Affective affectivePanel = new Affective(dataGenerator);
 	/**
