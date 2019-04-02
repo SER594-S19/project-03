@@ -21,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.sun.javafx.css.SubCssMetaData;
+
 public class SimulatorUI extends JPanel implements ActionListener, Observer {
 
 	private NewSubscriber subscriber;
@@ -32,7 +34,8 @@ public class SimulatorUI extends JPanel implements ActionListener, Observer {
 	static private final String IP = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
 	static private Pattern IP_PATTERN = Pattern.compile(IP);
 
-	
+	static VectorProject2 v=new VectorProject2("cadsf");
+    
 	SimulatorUI(NewSubscriber subscriber) {
 		this.subscriber = subscriber;
 		this.setBackground(Color.decode("#4267b2"));
@@ -131,6 +134,10 @@ public class SimulatorUI extends JPanel implements ActionListener, Observer {
 			subscriber.setPort(Integer.parseInt(port.getText()));
 			service.submit(subscriber);
 			subscriber.addObserver(this);
+			if(!v.isVisible()) {
+				v.pack();
+				v.setVisible(true);
+			}
 		} else {
 			close();
 			connectButton.setText("Connect");
