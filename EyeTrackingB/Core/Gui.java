@@ -4,9 +4,7 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import javafx.scene.text.Text;
-
 import java.awt.*;
 import java.util.Calendar;
 import java.awt.event.*;

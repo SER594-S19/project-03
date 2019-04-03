@@ -28,8 +28,8 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   private JButton buttonPort4 = new JButton("Connect for Heart Rate");
   private JButton buttonPort5 = new JButton("Connect for Galvanic Skin Conductivity");
   
+  
   public ClientDemo() {
-
     service = Executors.newCachedThreadPool();
     subscriber[0] = new Subscriber("localhost", 1596);
     subscriber[1] = new Subscriber("localhost", 1595);
@@ -57,14 +57,19 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     buttonPort4.setFont(new Font("Courier",Font.BOLD, 20));
     buttonPort5.setBackground(Color.PINK);
     buttonPort5.setFont(new Font("Courier",Font.BOLD, 20));
+    textArea.setBounds(50,50,300,300);
+   // graph.setSize(400,400);
+    //graph.setBounds(20, 100, 300, 300);
+    //graph.setVisible(true);
     panelBCI.add(buttonPort1);
     panelFR.add(buttonPort2);
     panelET.add(buttonPort3);
     panelHR.add(buttonPort4);
     panelSC.add(buttonPort5);
-   
+    panelET.add(textArea);
+    
     JTabbedPane tp = new JTabbedPane();  
-    tp.setBounds(50,50,800,800);  
+    tp.setBounds(10,10,900,900);  
     tp.setBackground(Color.WHITE);
     tp.setFont(new Font("Courier",Font.BOLD,17));
     tp.add("BCI",panelBCI);  
@@ -73,9 +78,13 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
     tp.add("HeartRate",panelHR); 
     tp.add("SkinConductance",panelSC); 
     
-    getContentPane().setLayout(new BorderLayout());  
-    getContentPane().add(tp, BorderLayout.NORTH);
-    getContentPane().add(textArea, BorderLayout.CENTER);
+   
+  
+    
+    getContentPane().setLayout(null);  
+    getContentPane().add(tp);
+   // getContentPane().add(textArea);
+   // getContentPane().add(graph);
        
     buttonPort1.addActionListener(this);
     buttonPort1.setEnabled(true);
@@ -94,7 +103,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
         System.exit(0);
       }
     });
-    setSize(670,500);
+    setSize(1000,1000);
     setVisible(true);
     
   }
@@ -122,8 +131,11 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   @Override
   public void update(Observable o, Object arg) {
     String data = ((Subscriber) o).getObject().toString();
-    if (data.compareTo("FIN") != 0)
+    if (data.compareTo("FIN") != 0) {
       textArea.append(data + "\n" );
+    	GraphingData gf=new GraphingData();
+    	gf.graphcall();
+    	}
     else {
       close();
       buttonPort3.setEnabled(true);
@@ -149,6 +161,7 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
 		  JOptionPane.showMessageDialog(null,"Port3 EyeTracking Connecting.");
 		  	service.submit(subscriber[2]);
 		    subscriber[2].addObserver(this);
+		   
 	  }else if (e.getSource() == buttonPort4) {
 		  JOptionPane.showMessageDialog(null,"Port4 HeartRate Connecting.");
 		  	service.submit(subscriber[3]);
