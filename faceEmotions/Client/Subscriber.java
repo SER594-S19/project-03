@@ -1,7 +1,5 @@
 package Client;
 
-import Core.ErrorDialogue1;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -61,10 +59,7 @@ public class Subscriber extends Observable implements Runnable {
       client = new Socket(InetAddress.getByName(Ip.trim()), port); 
       input = new BufferedReader(new InputStreamReader(client.getInputStream()));      
       client.setSoTimeout(1000);
-
     } catch (IOException ex) {
-      ErrorDialogue1 er = new ErrorDialogue1();
-      er.show("The network is unreachable", "Make sure the IP address you entered is correct or if Server is running");
       stop = true;
     }
     while (!stop) {
