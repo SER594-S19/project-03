@@ -14,9 +14,10 @@ public class Writer implements Observer {
 	private String file;
 	private BufferedWriter fileWriter;
 
-	public Writer() {
-		
-		file = "output " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()) + ".csv";
+
+
+	public Writer(int num) {
+		file = num+" BCI output " + ".csv";
 		try {
 			fileWriter = new BufferedWriter(new FileWriter(file, true));
 		} catch (IOException e) {

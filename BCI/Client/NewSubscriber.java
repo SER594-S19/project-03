@@ -1,13 +1,10 @@
 package BCI.Client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Observable;
-
+import java.util.HashMap;
 import ClientHeartRateTeam.FileOutputObserver;
 
 public class NewSubscriber extends Observable implements Runnable {
@@ -17,12 +14,15 @@ public class NewSubscriber extends Observable implements Runnable {
 	private int port;
 	private String data;
 	private Writer file;
-	
-	
+	private int num;
+	private HashMap<Integer, Integer> map;
+
 	NewSubscriber(String Ip, int port) {
 		this.stop=false;
 		this.Ip = Ip;
 		this.port = port;
+		this.num=0;
+		this.map= new HashMap<>();
 	}
 
 	public String getIp() {
@@ -71,11 +71,21 @@ public class NewSubscriber extends Observable implements Runnable {
 		boolean serverCheck = false;
 		boolean serverRunning = false;
 
+
 		try {
 			client = new Socket(InetAddress.getByName(Ip.trim()), port);
 			input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			client.setSoTimeout(1000);
-			file = new Writer();
+			if(!map.containsKey(port)){
+				map.put(port,1);
+			}else{
+				map.put(port,map.get(port)+1);
+			}
+			for(Integer p:map.keySet()) {
+				num=Math.max(num,map.get(p));
+			}
+
+			file = new Writer(num);
 			this.addObserver(file);
 			serverCheck = true;
 			serverRunning = true;
