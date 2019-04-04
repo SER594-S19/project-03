@@ -57,13 +57,14 @@ public class ClientDemo extends JFrame implements Observer, ActionListener {
   private JButton buttonConnect4 = new JButton("connect");
   private JButton buttonConnect5 = new JButton("connect");
   private JComponent panel1 = makeTextPanel1("Face");
+  private JScrollPane scroller = new JScrollPane(panel1);
   private JComponent panel2 = makeTextPanel2("Eyes");
   private JComponent panel3 = makeTextPanel3("Skin");
   private JComponent panel4 = makeTextPanel4("Heart Rate");
   private JComponent panel5 = makeTextPanel5("BCI");
   
   
-  String filePath = "C:/Users/subhr/Desktop/Desktop_Folders/SER594/input.csv";
+  String filePath = "/Volumes/SP PHD U3/HCIDATA/input.csv";
   File file = new File(filePath);
   
   FileWriter outputfile;

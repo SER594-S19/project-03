@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
@@ -21,15 +24,11 @@
          <font>
             <Font name="Hiragino Kaku Gothic StdN W8" size="13.0" />
          </font></Label>
-      <Ellipse fx:id="face" fill="#2197ff" layoutX="127.0" layoutY="141.0" radiusX="101.0" radiusY="108.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="30.0" />
-      <QuadCurve fx:id="smile" controlY="30.0" endX="50.0" endY="2.0" fill="DODGERBLUE" layoutX="119.0" layoutY="175.0" startX="-50.0" startY="2.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="417.4142150878906" AnchorPane.topAnchor="177.0" />
+      <Ellipse fx:id="face" fill="#ffe0bd" layoutX="127.0" layoutY="141.0" radiusX="101.0" radiusY="108.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="30.0" />
       <JFXToggleButton fx:id="toggle" layoutX="400.0" layoutY="281.0" prefHeight="48.0" prefWidth="140.0" text="RUN" textFill="#086f18" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="291.0">
          <font>
             <Font name="Hiragino Kaku Gothic StdN W8" size="14.0" />
          </font></JFXToggleButton>
-      <Circle fx:id="leftEye" fill="DODGERBLUE" layoutX="81.0" layoutY="98.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="82.0" />
-      <Circle fx:id="rightEye" fill="DODGERBLUE" layoutX="173.0" layoutY="98.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="388.0" AnchorPane.topAnchor="82.0" />
-      <Line fx:id="nose" endX="100.0" endY="-4.0" layoutX="32.0" layoutY="143.0" rotate="81.9" startX="75.0" AnchorPane.bottomAnchor="209.292893409729" AnchorPane.leftAnchor="102.70710754394531" AnchorPane.rightAnchor="442.2928924560547" AnchorPane.topAnchor="130.0" />
       <JFXSlider fx:id="agreement" blockIncrement="0.1" layoutX="365.0" layoutY="34.0" majorTickUnit="1.0" max="1.0" minorTickCount="0" onMouseReleased="#sliderAgreementDragged" showTickLabels="true" showTickMarks="true" value="0.01" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="30.0" />
       <JFXSlider fx:id="disagreement" blockIncrement="0.1" layoutX="362.0" layoutY="74.0" majorTickUnit="1.0" max="1.0" minorTickCount="0" onMouseReleased="#sliderDisagreementDragged" showTickLabels="true" showTickMarks="true" value="0.01" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="70.0" />
       <JFXSlider fx:id="frustate" blockIncrement="0.1" layoutX="362.0" layoutY="114.0" majorTickUnit="1.0" max="1.0" minorTickCount="0" onMouseReleased="#sliderFrustateDragged" showTickLabels="true" showTickMarks="true" value="0.01" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="110.0" />
@@ -74,6 +73,21 @@
       <ProgressIndicator fx:id="thinkingIndicator" layoutX="521.0" layoutY="195.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="33.0" progress="0.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="190.0" />
       <ProgressIndicator fx:id="unsureIndicator" layoutX="521.0" layoutY="244.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="33.0" progress="0.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="230.0" />
       <ProgressIndicator fx:id="aggrementIndicator" layoutX="521.0" layoutY="42.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="33.0" progress="0.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="30.0" />
-      <Label fx:id="serverRunning" layoutX="306.0" layoutY="325.0" text="Server Running..." visible="false" />
+      <Label fx:id="serverRunning" layoutX="306.0" layoutY="325.0" prefHeight="17.0" prefWidth="119.0" text="Server Running..." visible="false" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="341.0" />
+      <ImageView fx:id="thumbsUp" blendMode="MULTIPLY" fitHeight="45.0" fitWidth="65.0" layoutX="169.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true" />
+      <Ellipse fx:id="leftEye" fill="WHITE" layoutX="72.0" layoutY="113.0" radiusX="24.0" radiusY="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="leftEyeBall" layoutX="72.0" layoutY="113.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="rightEye" fill="WHITE" layoutX="161.0" layoutY="113.0" radiusX="24.0" radiusY="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="rightEyeBall" layoutX="161.0" layoutY="113.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="153.0" />
+      <Line fx:id="faceupper" endX="100.0" layoutX="70.0" layoutY="195.0" />
+      <QuadCurve fx:id="smile" controlX="50.0" controlY="-43.0" endX="100.0" fill="WHITE" layoutX="70.0" layoutY="217.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" />
+      <Line fx:id="nose" endX="50.0" layoutX="95.0" layoutY="150.0" rotate="100.0" />
+      <Line endX="10.0" layoutX="115.0" layoutY="176.0" rotate="-12.5" />
+      <ImageView fx:id="thumbsDown" blendMode="MULTIPLY" fitHeight="45.0" fitWidth="65.0" layoutX="16.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="reset" graphicTextGap="6.0" layoutX="332.0" layoutY="319.0" mnemonicParsing="false" onAction="#Reset" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 4px;" text="Reset" textFill="#086f18">
+         <font>
+            <Font name="Hiragino Kaku Gothic StdN W8" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
