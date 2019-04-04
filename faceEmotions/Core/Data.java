@@ -13,28 +13,28 @@ public class Data {
     private float agreement;
     private float concentrating;
     private float disagreement;
-    private float interested;
+    private float frustrated;
     private float thinking;
     private float unsure;
 
 
-    public Data(double time, float agreement, float concentrating, float disagreement, float interested, float thinking, float unsure) {
+    public Data(double time, float agreement, float concentrating, float disagreement, float frustrated, float thinking, float unsure) {
         this.time = time;
         this.agreement = agreement;
         this.concentrating = concentrating;
         this.disagreement = disagreement;
-        this.interested = interested;
+        this.frustrated = frustrated;
         this.thinking = thinking;
         this.unsure = unsure;
 
     }
 
-    public void setData(double time1, float agreement1, float concentrating1, float disagreement1, float interested1, float thinking1, float unsure1) {
+    public void setData(double time1, float agreement1, float concentrating1, float disagreement1, float frustrated1, float thinking1, float unsure1) {
         time= time1;
         agreement = agreement1;
         concentrating = concentrating1;
         disagreement = disagreement1;
-        interested = interested1;
+        frustrated = frustrated1;
         thinking = thinking1;
         unsure = unsure1;
     }
@@ -42,9 +42,21 @@ public class Data {
     @Override
     public String toString()
     {
-        return "Data{ " + "time= " + time + ", agreement= " + agreement +
-                ", concentrating= " + concentrating + ", disagreement= " + disagreement +
-                ", interested= " + interested + ", thinking= " + thinking  + ", unsure= " + unsure  + "}";
+        return time + "," + agreement +
+                "," + concentrating + "," + disagreement +
+                "," + frustrated + "," + thinking  + "," + unsure;
+    }
+
+    public double[] getData() {
+        double[] arr = new double[7];
+        arr[1] = agreement;
+        arr[2] = concentrating;
+        arr[3] = disagreement;
+        arr[4] = frustrated;
+        arr[5] = thinking;
+        arr[6] = unsure;
+        return arr;
+
     }
 
 
@@ -64,8 +76,8 @@ public class Data {
         return disagreement;
     }
 
-    public float getInterested() {
-        return interested;
+    public float getFrustrated() {
+        return frustrated;
     }
 
     public float getThinking() {

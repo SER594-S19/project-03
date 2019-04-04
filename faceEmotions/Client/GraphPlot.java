@@ -20,14 +20,42 @@ class GraphPlot extends JPanel{
     int size = x.length;
     int[] xx = new int[size];
     int[] yy = new int[size];
+    int count = 0;
+
+//    List<String> lines = new ArrayList<>();
+//    String line = null;
+//while ((line = reader.readLine()) != null) {
+//        lines.add(line);
+//    }
+//
+//System.out.println(lines.get(0));
    
 public GraphPlot(){
- 
+
         ArrayList<ArrayList<Double>> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/subhr/Desktop/Desktop_Folders/SER594/input.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/Volumes/SP PHD U3/HCIDATA/input.csv"))) {
             String line;
             int i=0;
+            int j = 17;
             while ((line = br.readLine()) != null) {
+                if(i == 50){
+                    //Now ready to plot the results
+                    BufferedImage firstimg = new BufferedImage(50 , 50, BufferedImage.TYPE_3BYTE_BGR);
+                    Graphics2D g1 = firstimg.createGraphics();
+
+                    paint(g1);
+
+                    File file1 = new File("/Volumes/SP PHD U3/HCIDATA/myBadImage"+j+".png");
+                    try {
+                        ImageIO.write(firstimg, "png", file1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    i = 0;
+                    j = j + 1;
+                    continue;
+
+                }
                 String[] values = line.split(",");
                 double origValX = 0;
                 double origValY = 0;
@@ -36,12 +64,12 @@ public GraphPlot(){
             	origValX = origValX+Double.parseDouble(values[2]);
             	origValX = origValX-Double.parseDouble(values[3]);
             	origValX = origValX-Double.parseDouble(values[4]);
-            	origValX = origValX-Double.parseDouble(values[5]);
+            	origValX = origValX+Double.parseDouble(values[5]);
             	origValX = origValX-Double.parseDouble(values[6]);
             	
             	x[i] = origValX;
-            	xx[i] = 20+(int)(origValX*100)/5;
-       
+            	xx[i] = (int)((((origValX + 3) / 6) * 50) - 25 );
+
             	origValY = origValY-Double.parseDouble(values[1]);
             	origValY = origValY-Double.parseDouble(values[2]);
             	origValY = origValY+Double.parseDouble(values[3]);
@@ -50,8 +78,7 @@ public GraphPlot(){
             	origValY = origValY-Double.parseDouble(values[6]);
             	
             	y[i] = origValY;
-            	yy[i] = 100+(int)(origValY*100)/5;
-            	
+                yy[i] = (int)((((origValX + 4) / 6) * 50) - 25 );
             	i++;
             	
                
@@ -61,32 +88,21 @@ public GraphPlot(){
 			e.printStackTrace();
 		}
                  
-        //Now ready to plot the results
-        BufferedImage firstimg = new BufferedImage(300 , 400, BufferedImage.TYPE_3BYTE_BGR);
-        Graphics2D g1 = firstimg.createGraphics();
-        
-        paint(g1);  
-        
-        File file1 = new File("C:/Users/subhr/Desktop/Desktop_Folders/SER594/myimage.png");
-        try {
-    		ImageIO.write(firstimg, "png", file1);
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
+
 
   }
    
    
-  public void paint(Graphics g2d){   
+  public void paint(Graphics2D g2d){
 
-     
-    g2d.drawLine(120, 100, 120, 300);
-     
-    g2d.drawLine(20, 200, 220, 200);
-     
+      g2d.drawLine(25, 0, 25, 50);
+
+      g2d.drawLine(0, 25, 50, 25);
+
+      g2d.translate(25.0,25.0);
     // Draw Lines
     
-    for (int j = 0; j < size-1; j++)
+    for (int j = 0; j < 50; j++)
     {
     	System.out.println(xx[j]);
     	System.out.println(yy[j]);
