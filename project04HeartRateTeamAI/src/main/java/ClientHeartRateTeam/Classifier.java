@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.ClientHeartRateTeam;
+package ClientHeartRateTeam;
 
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;

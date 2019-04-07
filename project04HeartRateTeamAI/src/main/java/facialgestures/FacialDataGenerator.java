@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.facialgestures;
+package facialgestures;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.ClientHeartRateTeam;
+package ClientHeartRateTeam;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.HeartRate;
+package HeartRate;
 
 import Core.Publisher;
 import HeartRate.HRDataGenerator;

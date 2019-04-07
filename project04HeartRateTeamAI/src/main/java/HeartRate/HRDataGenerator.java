@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.HeartRate;
+package HeartRate;
 
 import java.util.ArrayList;
 import java.util.Calendar;

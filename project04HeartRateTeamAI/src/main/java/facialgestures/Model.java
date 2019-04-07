@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.facialgestures;
+package facialgestures;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;

@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.ClientHeartRateTeam;
+package ClientHeartRateTeam;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;

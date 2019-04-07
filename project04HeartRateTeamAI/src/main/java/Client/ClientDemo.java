@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.ClientHeartRateTeam.Client;
+package Client;
 
 import Client.Subscriber;
 

@@ -1,4 +1,4 @@
-package project04HeartRateTeamAI.src.main.java.facialgestures;
+package facialgestures;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
