@@ -14,6 +14,7 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -28,6 +29,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JRadioButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Gui extends JFrame implements ActionListener{
 
@@ -36,7 +40,7 @@ public class Gui extends JFrame implements ActionListener{
 
 	private final int PORT = 1594;
 	protected JLabel labelPublishPort;
-	private DataGenerator dataGenerator =new DataGenerator();
+	private static DataGenerator dataGenerator =new DataGenerator();
 	public static List<JLabel> channelLabels=new ArrayList<>(); 
 	public static List<JButton> channelButtons = new ArrayList<>();
 	
@@ -44,7 +48,8 @@ public class Gui extends JFrame implements ActionListener{
 	JLabel brainLabel = new JLabel("");
 	JLabel portLabel = new JLabel("Publishing at port:"+ PORT);
 	BCI.View.Expressions expressivePanel=new BCI.View.Expressions(dataGenerator);
-	Affective affectivePanel = new Affective(dataGenerator);
+	public static Affective affectivePanel = new Affective(dataGenerator);
+	private final ButtonGroup settingButtonGroup = new ButtonGroup();
 	/**
 	 * Launch the application.
 	 */
@@ -288,15 +293,69 @@ public class Gui extends JFrame implements ActionListener{
 
 
 		
-		expressivePanel.setBounds(730, 78, 647, 321);
+		expressivePanel.setBounds(730, 142, 647, 316);
 		getContentPane().add(expressivePanel);
 		expressivePanel.setLayout(null);
 
 		
-		affectivePanel.setSize(614, 315);
-		affectivePanel.setLocation(730, 413);
+		affectivePanel.setSize(614, 289);
+		affectivePanel.setLocation(730, 471);
 		getContentPane().add(affectivePanel);
-
+		
+		JLabel lblSelectSetting = new JLabel("Select Setting");
+		lblSelectSetting.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSelectSetting.setBounds(730, 106, 113, 20);
+		contentPane.add(lblSelectSetting);
+		
+		JRadioButton rdbtnHappy = new JRadioButton("Happy");
+		rdbtnHappy.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				dataGenerator.setting="happy";
+			}
+		});
+		rdbtnHappy.setBounds(846, 101, 92, 29);
+		contentPane.add(rdbtnHappy);
+		settingButtonGroup.add(rdbtnHappy);
+		
+		JRadioButton rdbtnNeutral = new JRadioButton("Neutral");
+		rdbtnNeutral.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				dataGenerator.setting="neutral";
+			}
+		});
+		rdbtnNeutral.setBounds(933, 102, 92, 29);
+		contentPane.add(rdbtnNeutral);
+		settingButtonGroup.add(rdbtnNeutral);
+		
+		JRadioButton rdbtnSad = new JRadioButton("Sad");
+		rdbtnSad.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				dataGenerator.setting="sad";
+			}
+		});
+		rdbtnSad.setBounds(1042, 102, 78, 29);
+		contentPane.add(rdbtnSad);
+		settingButtonGroup.add(rdbtnSad);
+		
+		JRadioButton rdbtnRandom = new JRadioButton("Random");
+		rdbtnRandom.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				dataGenerator.setting="random";
+			}
+		});
+		rdbtnRandom.setSelected(true);
+		rdbtnRandom.setBounds(1132, 101, 92, 29);
+		contentPane.add(rdbtnRandom);
+		settingButtonGroup.add(rdbtnRandom);
+		
+		JRadioButton rdbtnManual = new JRadioButton("Manual");
+		rdbtnManual.setBounds(1234, 102, 155, 29);
+		contentPane.add(rdbtnManual);
+		settingButtonGroup.add(rdbtnManual);
 	}
 
 

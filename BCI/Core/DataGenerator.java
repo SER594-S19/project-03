@@ -3,6 +3,7 @@ package BCI.Core;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Observable;
+import java.util.concurrent.ThreadLocalRandom;
 
 import BCI.Model.AffectiveData;
 import BCI.Model.ExpressionData;
@@ -11,13 +12,15 @@ public class DataGenerator extends Observable implements Runnable {
 
   private Data data;
   private boolean stop = false; 
-
+  public String setting="random";
   public void stop() {
     this.stop = true;
   }
 
   public Object getObject() {
+	  System.out.println("Data sent is" +data.getAffective().getFrustration()+"");
     return data;
+    
   }
   
   public DataGenerator() {
@@ -33,7 +36,7 @@ public class DataGenerator extends Observable implements Runnable {
     calendar.set(Calendar.SECOND, 0);
     long initialTime = calendar.getTimeInMillis();
     double timeStamp = 0;
-
+    
     while (!stop) {
       System.out.println("data generator running");
       timeStamp = (System.currentTimeMillis() - initialTime) * .001;
@@ -46,6 +49,7 @@ public class DataGenerator extends Observable implements Runnable {
        }
       data.setValues(values);
       data.setTimeStamp(timeStamp);
+      setData();
       createAndNotify();
       try {
         Thread.sleep(1000); 
@@ -53,8 +57,83 @@ public class DataGenerator extends Observable implements Runnable {
       }
     }
   }
+  
+  private void setData() {
+	  if(setting.equals("happy")) {
+		  setHappyData();
+	  } else if(setting.equals("neutral")) {
+		  setNeutralData();
+	  } else if(setting.equals("sad")) {
+		  setSadData();
+	  } else if(setting.equals("random")) {
+		  setRandomData();
+	  }
+  }
+  public void setHappyData() {
+	  AffectiveData affectiveData=this.data.getAffective();
+	  double frustration = ThreadLocalRandom.current().nextDouble(0, 0.4);
+	  Gui.affectivePanel.getAffectiveController().setFrustration(frustration);
+	  double engagement = ThreadLocalRandom.current().nextDouble(0, 0.3 + 1);
+	  Gui.affectivePanel.getAffectiveController().setEngagement(engagement);
+	  double meditation = ThreadLocalRandom.current().nextDouble(0, 0.2);
+	  Gui.affectivePanel.getAffectiveController().setMeditation(meditation);
+	  double stengagement = ThreadLocalRandom.current().nextDouble(0.5, 1);
+	  Gui.affectivePanel.getAffectiveController().setStExcitement(stengagement);
+	  double ltengagement = ThreadLocalRandom.current().nextDouble(0.5, 1);
+	  Gui.affectivePanel.getAffectiveController().setltExcitement(ltengagement);
+	  data.getAffective().updateAffectiveData(frustration, engagement, meditation, stengagement, ltengagement);
+	  this.data.setAffective(data.getAffective());
+  }
+  
+  public void setNeutralData() {
+	  AffectiveData affectiveData=this.data.getAffective();
+	  double frustration = ThreadLocalRandom.current().nextDouble(0, 0.3);
+	  Gui.affectivePanel.getAffectiveController().setFrustration(frustration);
+	  double engagement = ThreadLocalRandom.current().nextDouble(0, 0.4);
+	  Gui.affectivePanel.getAffectiveController().setEngagement(engagement);
+	  double meditation = ThreadLocalRandom.current().nextDouble(0.5, 1);
+	  Gui.affectivePanel.getAffectiveController().setMeditation(meditation);
+	  double stengagement = ThreadLocalRandom.current().nextDouble(0.3, 0.7);
+	  Gui.affectivePanel.getAffectiveController().setEngagement(stengagement);
+	  double ltengagement = ThreadLocalRandom.current().nextDouble(0.5, 0.8 );
+	  Gui.affectivePanel.getAffectiveController().setltExcitement(ltengagement);
+	  data.getAffective().updateAffectiveData(frustration, engagement, meditation, stengagement, ltengagement);
+	  this.data.setAffective(data.getAffective());
+  }
+  
+  public void setSadData() {
+	  AffectiveData affectiveData=this.data.getAffective();
+	  double frustration = ThreadLocalRandom.current().nextDouble(0.5, 1);
+	  Gui.affectivePanel.getAffectiveController().setFrustration(frustration);
+	  double engagement = ThreadLocalRandom.current().nextDouble(0, 0.4);
+	  Gui.affectivePanel.getAffectiveController().setEngagement(engagement);
+	  double meditation = ThreadLocalRandom.current().nextDouble(0, 0.4);
+	  Gui.affectivePanel.getAffectiveController().setMeditation(meditation);
+	  double stengagement = ThreadLocalRandom.current().nextDouble(0, 0.5);
+	  Gui.affectivePanel.getAffectiveController().setStExcitement(stengagement);
+	  double ltengagement = ThreadLocalRandom.current().nextDouble(0, 0.5);
+	  Gui.affectivePanel.getAffectiveController().setltExcitement(ltengagement);
+	  data.getAffective().updateAffectiveData(frustration, engagement, meditation, stengagement, ltengagement);
+	  this.data.setAffective(data.getAffective());
+  }
+  
+  public void setRandomData() {
+	  AffectiveData affectiveData=this.data.getAffective();
+	  double frustration = ThreadLocalRandom.current().nextDouble(0, 1);
+	  Gui.affectivePanel.getAffectiveController().setFrustration(frustration);
+	  double engagement = ThreadLocalRandom.current().nextDouble(0, 1);
+	  Gui.affectivePanel.getAffectiveController().setEngagement(engagement);
+	  double meditation = ThreadLocalRandom.current().nextDouble(0, 1);
+	  Gui.affectivePanel.getAffectiveController().setMeditation(meditation);
+	  double stengagement = ThreadLocalRandom.current().nextDouble(0, 1);
+	  Gui.affectivePanel.getAffectiveController().setStExcitement(stengagement);
+	  double ltengagement = ThreadLocalRandom.current().nextDouble(0, 1);
+	  Gui.affectivePanel.getAffectiveController().setltExcitement(ltengagement);
+	  data.getAffective().updateAffectiveData(frustration, engagement, meditation, stengagement, ltengagement);
+	  this.data.setAffective(data.getAffective());
+  }
 
-  private void createAndNotify() {
+   void createAndNotify() {
     System.out.println("notifying ...");
     setChanged();
     notifyObservers();
@@ -74,5 +153,6 @@ public class DataGenerator extends Observable implements Runnable {
 		  Gui.channelButtons.get(index).setBackground(Color.decode("#008b00"));
 	  }
   }
-
+  
+  
 }

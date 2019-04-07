@@ -17,7 +17,13 @@ import java.awt.Font;
 
 public class Affective extends JPanel{
 
-	
+	AffectiveController affectiveController;
+	public AffectiveController getAffectiveController() {
+		return affectiveController;
+	}
+	public void setAffectiveController(AffectiveController affectiveController) {
+		this.affectiveController = affectiveController;
+	}
 	public Affective(DataGenerator dg) {
 		setLayout(null);
 		
@@ -83,25 +89,7 @@ public class Affective extends JPanel{
 		add(sliderLTEngagement);
 	
 		
-		new AffectiveController(sliderFrustration,sliderEngagement,sliderMeditation,sliderSTEngagement,sliderLTEngagement,dg);
+		this.affectiveController=new AffectiveController(sliderFrustration,sliderEngagement,sliderMeditation,sliderSTEngagement,sliderLTEngagement,dg);
 		
 	}
-	
-	
-//	public static void main (String [] args) {
-//		
-//		JFrame frame = new JFrame();
-//		frame.setSize(500, 400);
-//		frame.getContentPane().add(new Affective());
-//		
-//		
-//		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-//		      @Override
-//		      public void windowClosing(java.awt.event.WindowEvent e) {
-//		        System.exit(0);
-//		      }
-//		    });
-//		
-//		frame.setVisible(true);
-//	}
 }

@@ -46,8 +46,6 @@ public class BciClient extends JPanel {
         clientFrame.setLayout(new GridLayout(1, 2));
         BciClient bciClient=new BciClient();
         clientFrame.getContentPane().add(bciClient);
-//        VectorProject2 v=new VectorProject2("vector");
-//        clientFrame.getContentPane().add(v);
         PlotPanel p = PlotPanel.getIntance();
         clientFrame.add(p);
         p.repaint();

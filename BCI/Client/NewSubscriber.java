@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.Observable;
 import java.util.HashMap;
 import ClientHeartRateTeam.FileOutputObserver;
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
 
 public class NewSubscriber extends Observable implements Runnable {
 
@@ -16,13 +18,26 @@ public class NewSubscriber extends Observable implements Runnable {
 	private Writer file;
 	private int num;
 	private HashMap<Integer, Integer> map;
-
+	private static File trainFile = new File("train.csv"); 
+	private static FileWriter outputfile ; 
+	private static CSVWriter writer=null;
 	NewSubscriber(String Ip, int port) {
 		this.stop=false;
 		this.Ip = Ip;
 		this.port = port;
 		this.num=0;
 		this.map= new HashMap<>();
+		if(writer==null) {
+			try {
+				outputfile=new FileWriter(trainFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			writer=new CSVWriter(outputfile);
+			String[] header = { "Pleasure", "Arousal", "Label" }; 
+		     writer.writeNext(header); 
+		}
 	}
 
 	public String getIp() {
@@ -59,6 +74,12 @@ public class NewSubscriber extends Observable implements Runnable {
 
 	public void stop() {
 		stop = true;
+		 try {
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
 	}
 
 	@Override
@@ -105,43 +126,34 @@ public class NewSubscriber extends Observable implements Runnable {
 			} else {
 				System.out.println(measureLocal);
 				setData(measureLocal);
-				if(measureLocal.contains("Channel 5")) {
-					String[] tokens=measureLocal.split(":");
-					PADCalculator.pleasure=Double.parseDouble(tokens[1]);
-					VectorProject2.vectorSeries.remove(0);
-					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
-					if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal <0.5) {
-						PlotPanel.getIntance().setHappyFace();
-						
-					}
-					if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal >0.5) {
-						PlotPanel.getIntance().setNeutralFace();
-					}
-					if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal >0.5) {
-						PlotPanel.getIntance().setSadFace();
-					}
-
-					if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal <0.5) {
-						PlotPanel.getIntance().setNeutralFace();
-					}
-				}
+				calculatePA(measureLocal);
+//				if(measureLocal.contains("Channel 5")) {
+//					String[] tokens=measureLocal.split(":");
+//					PADCalculator.pleasure=Double.parseDouble(tokens[1]);
+//					//PADCalculator.calculatePA();
+//					VectorProject2.vectorSeries.remove(0);
+//					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+//					labelCalculator();
+//				}
 				
-				if(measureLocal.contains("Heart Rate")) {
-					
-					String[] tokens=measureLocal.split(",")[1].split("=");
-					PADCalculator.arousal=Double.parseDouble(tokens[1]);
-					PADCalculator.arousal=PADCalculator.arousal<100?PADCalculator.arousal/100:PADCalculator.arousal/1000;
-					VectorProject2.vectorSeries.remove(0);
-					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
-					System.out.println("heart rate: "+PADCalculator.arousal);
-					
-				}
-				
+//				if(measureLocal.contains("Heart Rate")) {
+//					
+//					String[] tokens=measureLocal.split(",")[1].split("=");
+//					PADCalculator.arousal=Double.parseDouble(tokens[1]);
+//					PADCalculator.arousal=PADCalculator.arousal<100?PADCalculator.arousal/100:PADCalculator.arousal/1000;
+//					//PADCalculator.calculatePA();
+//					VectorProject2.vectorSeries.remove(0);
+//					VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+//					labelCalculator();
+//				}
+//				
 				setChanged();
 				notifyObservers();
 			}
 			try {
+				if(port==1700) {
 				Thread.sleep(100);
+				}
 			} catch (InterruptedException ex) {
 				System.out.println("Exception: " + ex);
 			}
@@ -165,6 +177,61 @@ public class NewSubscriber extends Observable implements Runnable {
 			setData("FIN");
 		setChanged();
 		notifyObservers();
+	}
+	
+	private void labelCalculator() {
+		if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal <0.5) {
+			PlotPanel.getIntance().setHappyFace();
+			writePAToCsv(1);
+			
+		}
+		if(PADCalculator.pleasure > 0.5 && PADCalculator.arousal >0.5) {
+			PlotPanel.getIntance().setNeutralFace();
+			writePAToCsv(2);
+		}
+		if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal >0.5) {
+			PlotPanel.getIntance().setSadFace();
+			writePAToCsv(3);
+		}
+
+		if(PADCalculator.pleasure < 0.5 && PADCalculator.arousal <0.5) {
+			PlotPanel.getIntance().setNeutralFace();
+			writePAToCsv(2);
+		}
+		
+	}
+	
+	private void calculatePA(String measureLocal) {
+		if(measureLocal.contains("short term engagement")) {
+			String[] tokens=measureLocal.split(":");
+			PADCalculator.stexcitement=Double.parseDouble(tokens[1]);
+			PADCalculator.calculatePA();
+			
+		}
+		if(measureLocal.contains("long term engagement")) {
+			String[] tokens=measureLocal.split(":");
+			PADCalculator.ltexcitement=Double.parseDouble(tokens[1]);
+			PADCalculator.calculatePA();
+			
+		}
+		if(measureLocal.contains("meditation")) {
+			String[] tokens=measureLocal.split(":");
+			PADCalculator.mediatation=Double.parseDouble(tokens[1]);
+			PADCalculator.calculatePA();	
+		}
+		if(measureLocal.contains("frustration")) {
+			String[] tokens=measureLocal.split(":");
+			PADCalculator.frustration=Double.parseDouble(tokens[1]);
+			PADCalculator.calculatePA();	
+		}
+		VectorProject2.vectorSeries.remove(0);
+		VectorProject2.vectorSeries.add(0, 0, PADCalculator.pleasure, PADCalculator.arousal);
+		labelCalculator();
+		
+	}
+	private void writePAToCsv(int label) {
+		 String[] data1 = { PADCalculator.pleasure+"", PADCalculator.arousal+"", label+"" }; 
+		 writer.writeNext(data1); 
 	}
 
 }

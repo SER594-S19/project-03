@@ -77,5 +77,21 @@ public class AffectiveController {
 		
 	}
 	
+	public void setFrustration(double vl) {
+		sliderFrustration.setValue((int)(vl*10));
+	}
+	public void setEngagement(double vl) {
+		sliderEngagement.setValue((int)(vl*10));
+	}
+	public void setStExcitement(double vl) {
+		sliderSTEngagement.setValue((int)(vl*10));
+	}
+	public void setltExcitement(double vl) {
+		sliderLTEngagement.setValue((int)(vl*10));
+	}
+	public void setMeditation(double vl) {
+		sliderMeditation.setValue((int)(vl*10));
+	}
+	
 
 }
