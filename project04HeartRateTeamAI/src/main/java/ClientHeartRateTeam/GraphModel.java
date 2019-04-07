@@ -1,4 +1,4 @@
-package ClientHeartRateTeam;
+package project04HeartRateTeamAI.src.main.java.ClientHeartRateTeam;
 
 import java.awt.*;
 import java.util.ArrayList;
