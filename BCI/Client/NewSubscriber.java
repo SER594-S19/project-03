@@ -18,9 +18,9 @@ public class NewSubscriber extends Observable implements Runnable {
 	private Writer file;
 	private int num;
 	private HashMap<Integer, Integer> map;
-	private static File trainFile = new File("train.csv"); 
+	private static File trainFile = new File("train.txt"); 
 	private static FileWriter outputfile ; 
-	private static CSVWriter writer=null;
+	private static BufferedWriter writer=null;
 	NewSubscriber(String Ip, int port) {
 		this.stop=false;
 		this.Ip = Ip;
@@ -34,9 +34,14 @@ public class NewSubscriber extends Observable implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			writer=new CSVWriter(outputfile);
-			String[] header = { "Pleasure", "Arousal", "Label" }; 
-		     writer.writeNext(header); 
+			try {
+				writer=new BufferedWriter(new FileWriter("train.txt",true));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			String[] header = { "Pleasure", "Arousal", "Label" }; 
+//		     writer.writeNext(header); 
 		}
 	}
 
@@ -230,8 +235,14 @@ public class NewSubscriber extends Observable implements Runnable {
 		
 	}
 	private void writePAToCsv(int label) {
-		 String[] data1 = { PADCalculator.pleasure+"", PADCalculator.arousal+"", label+"" }; 
-		 writer.writeNext(data1); 
+		 String  data1 =  PADCalculator.pleasure +","+ PADCalculator.arousal+ ","+label ; 
+		 try {
+			writer.write(data1);
+			writer.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
